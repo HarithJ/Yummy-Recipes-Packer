@@ -1,0 +1,73 @@
+---
+- hosts: localhost
+  become: yes
+
+  tasks:
+  - name: Ensure ppa exists to install python3.6
+    apt_repository: repo=ppa:deadsnakes/ppa
+
+  - name: Ensure python3.6 is installed
+    apt:
+      name: python3.6
+      force: yes
+      state: present
+      update_cache: yes
+
+  - name: Ensure build-essential is installed
+    apt:
+      pkg: build-essential
+      force: yes
+      state: present
+      update_cache: yes
+
+  - name: Ensure python3.6-dev is installed
+    apt:
+      pkg: python3.6-dev
+      force: yes
+      state: present
+      update_cache: yes
+
+  - name: Ensure python3-pip, Nginx is installed
+    apt:
+      name: "{{ item }}"
+      force: yes
+      state: present
+    with_items:
+      - python3-pip
+      - nginx
+
+  - name: Install virtualenv via pip
+    pip:
+      name: virtualenv
+      executable: pip3
+
+  - name: Create a directory where the app would live
+    file: path=/home/ubuntu/Yummy-Recipes state=directory
+
+  - name: Clone the Yummy-Recipes-Ch3 repository
+    git:
+      repo: 'https://github.com/HarithJ/Yummy-Recipes-Ch3'
+      dest: /home/ubuntu/Yummy-Recipes/Yummy-Recipes-Ch3
+      update: yes # Git pull if exists
+
+  - name: Install requirements into venv
+    pip:
+      requirements: /home/ubuntu/Yummy-Recipes/Yummy-Recipes-Ch3/requirements.txt
+      virtualenv: /home/ubuntu/Yummy-Recipes/venv
+      virtualenv_python: python3.6
+
+  - name: Copy uwsgi settings file so that we can use it to run Yummy-Recipes
+    copy:
+      src: uwsgi.ini
+      dest: /home/ubuntu/Yummy-Recipes/Yummy-Recipes-Ch3
+
+  - name: Copy the uwsgi service file so that the app runs in the background
+    copy:
+      src: yummy-recipes.service
+      dest: /etc/systemd/system/
+
+  - name: Start the service
+    systemd:
+      name: yummy-recipes
+      state: restarted
+      enabled: yes

@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve Yummy-Recipes
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/Yummy-Recipes/Yummy-Recipes-Ch3
+Environment="PATH=/home/ubuntu/Yummy-Recipes/venv/bin"
+ExecStart=/home/ubuntu/Yummy-Recipes/venv/bin/uwsgi --ini uwsgi.ini
+
+[Install]
+WantedBy=multi-user.target
