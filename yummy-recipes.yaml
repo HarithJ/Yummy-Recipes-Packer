@@ -77,3 +77,20 @@
       name: yummy-recipes
       state: restarted
       enabled: yes
+
+  - name: Configure Nginx Server
+    copy:
+      src: nginx-yummy-recipes
+      dest: /etc/nginx/sites-available/
+
+  - name: Create a symlink for nginx configurations
+    file:
+      src: /etc/nginx/sites-available/nginx-yummy-recipes
+      dest: /etc/nginx/sites-enabled
+      state: link
+
+  - name: Start the service
+    systemd:
+      name: nginx
+      state: restarted
+      enabled: yes

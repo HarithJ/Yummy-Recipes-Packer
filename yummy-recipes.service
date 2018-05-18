@@ -3,7 +3,7 @@ Description=uWSGI instance to serve Yummy-Recipes
 After=network.target
 
 [Service]
-User=ubuntu
+User=root
 Group=www-data
 WorkingDirectory=/home/ubuntu/Yummy-Recipes/Yummy-Recipes-Ch3
 Environment="PATH=/home/ubuntu/Yummy-Recipes/venv/bin"
