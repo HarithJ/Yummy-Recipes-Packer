@@ -84,12 +84,9 @@
       dest: /etc/nginx/sites-available/
 
   - name: Create a symlink for nginx configurations
-    file:
-      src: /etc/nginx/sites-available/nginx-yummy-recipes
-      dest: /etc/nginx/sites-enabled
-      state: link
+    shell: sudo ln -s /etc/nginx/sites-available/yummy-recipes /etc/nginx/sites-enabled
 
-  - name: Start the service
+  - name: Restart the Nginx service
     systemd:
       name: nginx
       state: restarted
