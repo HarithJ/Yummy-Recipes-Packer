@@ -2,7 +2,7 @@
 - hosts: localhost
   become: yes
   roles:
-  - setup
-  - project
-  - uwsgiServer
-  - nginxServer
+  - {role: 'setup', tags: 'setup'}
+  - {role: 'project', tags: 'project'}
+  - {role: 'uwsgiServer', tags: 'uwsgi'}
+  - {role: 'nginxServer', tags: 'nginx'}
