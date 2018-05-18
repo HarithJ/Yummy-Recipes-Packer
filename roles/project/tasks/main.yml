@@ -1,0 +1,14 @@
+- name: Create a directory where the app would live
+  file: path=/home/ubuntu/Yummy-Recipes state=directory
+
+- name: Clone the Yummy-Recipes-Ch3 repository
+  git:
+    repo: 'https://github.com/HarithJ/Yummy-Recipes-Ch3'
+    dest: /home/ubuntu/Yummy-Recipes/Yummy-Recipes-Ch3
+    update: yes # Git pull if exists
+
+- name: Install requirements into venv
+  pip:
+    requirements: /home/ubuntu/Yummy-Recipes/Yummy-Recipes-Ch3/requirements.txt
+    virtualenv: /home/ubuntu/Yummy-Recipes/venv
+    virtualenv_python: python3.6
