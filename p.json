@@ -27,7 +27,7 @@
       "script": "./setup.sh"
     },
     {
-      "type": "ansible-local",
+      "type": "ansible",
       "playbook_file": "yummy-recipes.yaml"
     }
   ]
