@@ -4,7 +4,7 @@
   vars:
     ansible_python_interpreter: "/usr/bin/python3"
   roles:
-  - {role: 'setup', tags: 'setup'}
-  - {role: 'project', tags: 'project'}
-  - {role: 'uwsgiServer', tags: 'uwsgi'}
-  - {role: 'nginxServer', tags: 'nginx'}
+     - setup
+     - project
+     - uwsgiServer
+     - nginxServer
