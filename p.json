@@ -23,10 +23,6 @@
   }],
   "provisioners": [
     {
-      "type": "shell",
-      "script": "./setup.sh"
-    },
-    {
       "type": "ansible",
       "playbook_file": "yummy-recipes.yaml"
     }
