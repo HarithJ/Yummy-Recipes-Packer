@@ -2,7 +2,7 @@
   template: src=nginx-yummy-recipes.j2 dest=/etc/nginx/sites-available/nginx-yummy-recipes
 
 - name: Create a symlink for nginx configurations
-  shell: sudo ln -s /etc/nginx/sites-available/yummy-recipes /etc/nginx/sites-enabled
+  shell: sudo ln -s /etc/nginx/sites-available/nginx-yummy-recipes /etc/nginx/sites-enabled
 
 - name: Restart the Nginx service
   systemd:
