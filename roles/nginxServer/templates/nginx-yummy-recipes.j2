@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name {{ ansible_eth0.ipv4.address }};
+    server_name {{ ansible_all_ipv4_addresses[1] }};
 
     location / {
         include uwsgi_params;
