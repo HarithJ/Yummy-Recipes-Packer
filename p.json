@@ -1,15 +1,12 @@
 {
-  "variables": {
-    "home": "{{env `HOME`}}"
-  },
   "builders": [{
     "type": "googlecompute",
-    "account_file": "{{ user `home` }}/.gcloud/packer-204711-1ea1e0e88da7.json",
-    "project_id": "Yummy-Recipes",
+    "account_file": "packer-204711-1ea1e0e88da7.json",
+    "project_id": "packer-204711",
     "source_image_family": "ubuntu-1604-lts",
     "ssh_username": "packer",
     "zone": "europe-west1-b",
-		"image_description": "Yummy-Recipes Image",
+		"image_description": "Yummy-Recipes-Image",
 		"image_name": "Yummy-Recipes-{{timestamp}}",
 		"account_file": "{{ user `service_account_json`}}"
   }],
