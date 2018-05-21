@@ -7,4 +7,5 @@
      - setup
      - project
      - uwsgiServer
+     - manala.cloud-init
      - nginxServer

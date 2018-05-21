@@ -1,11 +1,4 @@
-- name: Configure Nginx Server
-  template: src=nginx-yummy-recipes.j2 dest=/etc/nginx/sites-available/nginx-yummy-recipes
-
-- name: Create a symlink for nginx configurations
-  shell: sudo ln -s /etc/nginx/sites-available/nginx-yummy-recipes /etc/nginx/sites-enabled
-
-- name: Restart the Nginx service
-  systemd:
-    name: nginx
-    state: restarted
-    enabled: yes
+- name: Copy cloud-init script that would configure nginx
+  copy:
+    src: nginx-cloud-init.sh
+    dest: /var/lib/cloud/scripts/per-instance/
