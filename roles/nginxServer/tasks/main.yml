@@ -1,11 +1,18 @@
-- name: Configure Nginx Server
-  template: src=nginx-yummy-recipes.j2 dest=/etc/nginx/sites-available/nginx-yummy-recipes
+- name: Copy the script that configures nginx server to home directory
+  copy:
+    src: nginx-cloud-init.sh
+    dest: /home/ubuntu/
 
-- name: Create a symlink for nginx configurations
-  shell: sudo ln -s /etc/nginx/sites-available/nginx-yummy-recipes /etc/nginx/sites-enabled
+- name: copy the systemd file that would run the nginx config script on boot
+  copy:
+    src: config-nginx.service
+    dest: /etc/systemd/system/
 
-- name: Restart the Nginx service
+- name: Changing perm of nginx-cloud-init.sh, adding "+x"
+  file: dest=/home/ubuntu/nginx-cloud-init.sh mode=a+x
+
+- name: start config-nginx Service
   systemd:
-    name: nginx
-    state: restarted
+    name: config-nginx
+    state: started
     enabled: yes
