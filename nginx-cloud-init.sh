@@ -6,6 +6,8 @@ setupNginxServer () {
   createNginxSettingFile
   sudo mv /home/ubuntu/nginx-yummy-recipes /etc/nginx/sites-available/
   sudo ln -s /etc/nginx/sites-available/nginx-yummy-recipes /etc/nginx/sites-enabled
+  sudo rm /etc/nginx/sites-available/default
+  sudo rm /etc/nginx/sites-enabled/default
   sudo nginx -t
   sudo systemctl restart nginx
 
