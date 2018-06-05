@@ -310,7 +310,7 @@ data "aws_ami" "frontend_ami" {
 resource "aws_instance" "yummy-recipes-frontend-1a" {
   ami           = "${data.aws_ami.frontend_ami.id}"
   instance_type = "t2.micro"
-  key_name      = "harith-main"
+  key_name      = "${var.key_name}"
   vpc_security_group_ids = ["${aws_security_group.frontend-sg.id}"]
   subnet_id = "${aws_subnet.frontend-1a.id}"
   associate_public_ip_address = true
@@ -347,7 +347,7 @@ resource "aws_instance" "yummy-recipes-frontend-1a" {
 resource "aws_instance" "yummy-recipes-frontend-1b" {
   ami           = "${data.aws_ami.frontend_ami.id}"
   instance_type = "t2.micro"
-  key_name      = "harith-main"
+  key_name      = "${var.key_name}"
   vpc_security_group_ids = ["${aws_security_group.frontend-sg.id}"]
   subnet_id = "${aws_subnet.frontend-1b.id}"
   associate_public_ip_address = true
@@ -452,7 +452,7 @@ resource "aws_route53_record" "frontend-record" {
 resource "aws_instance" "yummy-recipes-api-1a" {
   ami           = "${data.aws_ami.api_ami.id}"
   instance_type = "t2.micro"
-  key_name      = "harith-main"
+  key_name      = "${var.key_name}"
   vpc_security_group_ids = ["${aws_security_group.api-sg.id}"]
   subnet_id = "${aws_subnet.api-1a.id}"
   associate_public_ip_address = true
@@ -465,7 +465,7 @@ resource "aws_instance" "yummy-recipes-api-1a" {
 resource "aws_instance" "yummy-recipes-api-1b" {
   ami           = "${data.aws_ami.api_ami.id}"
   instance_type = "t2.micro"
-  key_name      = "harith-main"
+  key_name      = "${var.key_name}"
   vpc_security_group_ids = ["${aws_security_group.api-sg.id}"]
   subnet_id = "${aws_subnet.api-1b.id}"
   associate_public_ip_address = true
