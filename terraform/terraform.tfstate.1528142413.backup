@@ -1,0 +1,1385 @@
+{
+    "version": 3,
+    "terraform_version": "0.11.7",
+    "serial": 7,
+    "lineage": "fc25e03a-5061-5a06-350a-ee5008e6f118",
+    "modules": [
+        {
+            "path": [
+                "root"
+            ],
+            "outputs": {},
+            "resources": {
+                "aws_acm_certificate.cert": {
+                    "type": "aws_acm_certificate",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "arn:aws:acm:us-east-1:462206789139:certificate/7f51445f-55cd-4748-b0d9-1dd05d0403f9",
+                        "attributes": {
+                            "arn": "arn:aws:acm:us-east-1:462206789139:certificate/7f51445f-55cd-4748-b0d9-1dd05d0403f9",
+                            "domain_name": "yummyrecipes.ml",
+                            "domain_validation_options.#": "1",
+                            "domain_validation_options.0.domain_name": "yummyrecipes.ml",
+                            "domain_validation_options.0.resource_record_name": "_0a50cf10f917fe5190abaa791661f3fa.yummyrecipes.ml.",
+                            "domain_validation_options.0.resource_record_type": "CNAME",
+                            "domain_validation_options.0.resource_record_value": "_c7afd2496f36d297b5ad9d4a00a82098.acm-validations.aws.",
+                            "id": "arn:aws:acm:us-east-1:462206789139:certificate/7f51445f-55cd-4748-b0d9-1dd05d0403f9",
+                            "subject_alternative_names.#": "0",
+                            "tags.%": "1",
+                            "tags.name": "yummy-recipes",
+                            "validation_emails.#": "0",
+                            "validation_method": "DNS"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_default_route_table.private-rt": {
+                    "type": "aws_default_route_table",
+                    "depends_on": [
+                        "aws_nat_gateway.yummy-recipes-nat",
+                        "aws_vpc.yummy-recipes"
+                    ],
+                    "primary": {
+                        "id": "rtb-080a14039e67b5c85",
+                        "attributes": {
+                            "default_route_table_id": "rtb-080a14039e67b5c85",
+                            "id": "rtb-080a14039e67b5c85",
+                            "propagating_vgws.#": "0",
+                            "route.#": "1",
+                            "route.680665639.cidr_block": "0.0.0.0/0",
+                            "route.680665639.egress_only_gateway_id": "",
+                            "route.680665639.gateway_id": "",
+                            "route.680665639.instance_id": "",
+                            "route.680665639.ipv6_cidr_block": "",
+                            "route.680665639.nat_gateway_id": "nat-0084c96e174e7896d",
+                            "route.680665639.network_interface_id": "",
+                            "route.680665639.vpc_peering_connection_id": "",
+                            "tags.%": "1",
+                            "tags.Name": "private table",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_eip.nat-eip": {
+                    "type": "aws_eip",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "eipalloc-03c36248fb18fffb2",
+                        "attributes": {
+                            "association_id": "",
+                            "domain": "vpc",
+                            "id": "eipalloc-03c36248fb18fffb2",
+                            "instance": "",
+                            "network_interface": "",
+                            "private_ip": "",
+                            "public_ip": "34.199.185.88",
+                            "tags.%": "0",
+                            "vpc": "true"
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "delete": 180000000000,
+                                "read": 900000000000,
+                                "update": 300000000000
+                            }
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_instance.yummy-recipes-api-1a": {
+                    "type": "aws_instance",
+                    "depends_on": [
+                        "aws_security_group.api-sg",
+                        "aws_subnet.api-1a",
+                        "data.aws_ami.api_ami"
+                    ],
+                    "primary": {
+                        "id": "i-06f4d697ed2fa5923",
+                        "attributes": {
+                            "ami": "ami-039c9e39678f71170",
+                            "associate_public_ip_address": "false",
+                            "availability_zone": "us-east-1a",
+                            "credit_specification.#": "1",
+                            "credit_specification.0.cpu_credits": "standard",
+                            "disable_api_termination": "false",
+                            "ebs_block_device.#": "0",
+                            "ebs_optimized": "false",
+                            "ephemeral_block_device.#": "0",
+                            "get_password_data": "false",
+                            "iam_instance_profile": "",
+                            "id": "i-06f4d697ed2fa5923",
+                            "instance_state": "running",
+                            "instance_type": "t2.micro",
+                            "ipv6_addresses.#": "0",
+                            "key_name": "harith-main",
+                            "monitoring": "false",
+                            "network_interface.#": "0",
+                            "network_interface_id": "eni-07943088c31f25874",
+                            "password_data": "",
+                            "placement_group": "",
+                            "primary_network_interface_id": "eni-07943088c31f25874",
+                            "private_dns": "ip-10-0-51-104.ec2.internal",
+                            "private_ip": "10.0.51.104",
+                            "public_dns": "",
+                            "public_ip": "",
+                            "root_block_device.#": "1",
+                            "root_block_device.0.delete_on_termination": "true",
+                            "root_block_device.0.iops": "100",
+                            "root_block_device.0.volume_id": "vol-0c03e99b41e38c6c0",
+                            "root_block_device.0.volume_size": "8",
+                            "root_block_device.0.volume_type": "gp2",
+                            "security_groups.#": "0",
+                            "source_dest_check": "true",
+                            "subnet_id": "subnet-070786433b8fdb094",
+                            "tags.%": "1",
+                            "tags.Name": "yummy-recipes-api-1a",
+                            "tenancy": "default",
+                            "volume_tags.%": "0",
+                            "vpc_security_group_ids.#": "1",
+                            "vpc_security_group_ids.4233188520": "sg-0569f2f327fb32940"
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 600000000000,
+                                "delete": 1200000000000,
+                                "update": 600000000000
+                            },
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_instance.yummy-recipes-api-1b": {
+                    "type": "aws_instance",
+                    "depends_on": [
+                        "aws_security_group.api-sg",
+                        "aws_subnet.api-1b",
+                        "data.aws_ami.api_ami"
+                    ],
+                    "primary": {
+                        "id": "i-07bacadaa1aeeb8f6",
+                        "attributes": {
+                            "ami": "ami-039c9e39678f71170",
+                            "associate_public_ip_address": "false",
+                            "availability_zone": "us-east-1b",
+                            "credit_specification.#": "1",
+                            "credit_specification.0.cpu_credits": "standard",
+                            "disable_api_termination": "false",
+                            "ebs_block_device.#": "0",
+                            "ebs_optimized": "false",
+                            "ephemeral_block_device.#": "0",
+                            "get_password_data": "false",
+                            "iam_instance_profile": "",
+                            "id": "i-07bacadaa1aeeb8f6",
+                            "instance_state": "running",
+                            "instance_type": "t2.micro",
+                            "ipv6_addresses.#": "0",
+                            "key_name": "harith-main",
+                            "monitoring": "false",
+                            "network_interface.#": "0",
+                            "network_interface_id": "eni-00c147d091d037f8f",
+                            "password_data": "",
+                            "placement_group": "",
+                            "primary_network_interface_id": "eni-00c147d091d037f8f",
+                            "private_dns": "ip-10-0-52-59.ec2.internal",
+                            "private_ip": "10.0.52.59",
+                            "public_dns": "",
+                            "public_ip": "",
+                            "root_block_device.#": "1",
+                            "root_block_device.0.delete_on_termination": "true",
+                            "root_block_device.0.iops": "100",
+                            "root_block_device.0.volume_id": "vol-0fa806d61d205854f",
+                            "root_block_device.0.volume_size": "8",
+                            "root_block_device.0.volume_type": "gp2",
+                            "security_groups.#": "0",
+                            "source_dest_check": "true",
+                            "subnet_id": "subnet-0e32d7a84f5234c20",
+                            "tags.%": "1",
+                            "tags.Name": "yummy-recipes-api-1b",
+                            "tenancy": "default",
+                            "volume_tags.%": "0",
+                            "vpc_security_group_ids.#": "1",
+                            "vpc_security_group_ids.4233188520": "sg-0569f2f327fb32940"
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 600000000000,
+                                "delete": 1200000000000,
+                                "update": 600000000000
+                            },
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_instance.yummy-recipes-frontend-1a": {
+                    "type": "aws_instance",
+                    "depends_on": [
+                        "aws_security_group.frontend-sg",
+                        "aws_subnet.frontend-1a",
+                        "data.aws_ami.frontend_ami"
+                    ],
+                    "primary": {
+                        "id": "i-04560d7cf5c12503b",
+                        "attributes": {
+                            "ami": "ami-041494073ab057bb0",
+                            "associate_public_ip_address": "false",
+                            "availability_zone": "us-east-1a",
+                            "credit_specification.#": "1",
+                            "credit_specification.0.cpu_credits": "standard",
+                            "disable_api_termination": "false",
+                            "ebs_block_device.#": "0",
+                            "ebs_optimized": "false",
+                            "ephemeral_block_device.#": "0",
+                            "get_password_data": "false",
+                            "iam_instance_profile": "",
+                            "id": "i-04560d7cf5c12503b",
+                            "instance_state": "running",
+                            "instance_type": "t2.micro",
+                            "ipv6_addresses.#": "0",
+                            "key_name": "harith-main",
+                            "monitoring": "false",
+                            "network_interface.#": "0",
+                            "network_interface_id": "eni-0219fc315b78e4aeb",
+                            "password_data": "",
+                            "placement_group": "",
+                            "primary_network_interface_id": "eni-0219fc315b78e4aeb",
+                            "private_dns": "ip-10-0-1-88.ec2.internal",
+                            "private_ip": "10.0.1.88",
+                            "public_dns": "",
+                            "public_ip": "",
+                            "root_block_device.#": "1",
+                            "root_block_device.0.delete_on_termination": "true",
+                            "root_block_device.0.iops": "100",
+                            "root_block_device.0.volume_id": "vol-09062b4bb3b64af9d",
+                            "root_block_device.0.volume_size": "8",
+                            "root_block_device.0.volume_type": "gp2",
+                            "security_groups.#": "0",
+                            "source_dest_check": "true",
+                            "subnet_id": "subnet-07efbe658c6e9db01",
+                            "tags.%": "1",
+                            "tags.Name": "yummy-recipes-frontend-1a",
+                            "tenancy": "default",
+                            "volume_tags.%": "0",
+                            "vpc_security_group_ids.#": "1",
+                            "vpc_security_group_ids.40639550": "sg-060e73a35c142f159"
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 600000000000,
+                                "delete": 1200000000000,
+                                "update": 600000000000
+                            },
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_instance.yummy-recipes-frontend-1b": {
+                    "type": "aws_instance",
+                    "depends_on": [
+                        "aws_security_group.frontend-sg",
+                        "aws_subnet.frontend-1b",
+                        "data.aws_ami.frontend_ami"
+                    ],
+                    "primary": {
+                        "id": "i-0ed62d5f21c15d856",
+                        "attributes": {
+                            "ami": "ami-041494073ab057bb0",
+                            "associate_public_ip_address": "false",
+                            "availability_zone": "us-east-1b",
+                            "credit_specification.#": "1",
+                            "credit_specification.0.cpu_credits": "standard",
+                            "disable_api_termination": "false",
+                            "ebs_block_device.#": "0",
+                            "ebs_optimized": "false",
+                            "ephemeral_block_device.#": "0",
+                            "get_password_data": "false",
+                            "iam_instance_profile": "",
+                            "id": "i-0ed62d5f21c15d856",
+                            "instance_state": "running",
+                            "instance_type": "t2.micro",
+                            "ipv6_addresses.#": "0",
+                            "key_name": "harith-main",
+                            "monitoring": "false",
+                            "network_interface.#": "0",
+                            "network_interface_id": "eni-00ca6b79fda28919e",
+                            "password_data": "",
+                            "placement_group": "",
+                            "primary_network_interface_id": "eni-00ca6b79fda28919e",
+                            "private_dns": "ip-10-0-2-93.ec2.internal",
+                            "private_ip": "10.0.2.93",
+                            "public_dns": "",
+                            "public_ip": "",
+                            "root_block_device.#": "1",
+                            "root_block_device.0.delete_on_termination": "true",
+                            "root_block_device.0.iops": "100",
+                            "root_block_device.0.volume_id": "vol-08db8b20fe616be96",
+                            "root_block_device.0.volume_size": "8",
+                            "root_block_device.0.volume_type": "gp2",
+                            "security_groups.#": "0",
+                            "source_dest_check": "true",
+                            "subnet_id": "subnet-07485a504b52a62b2",
+                            "tags.%": "1",
+                            "tags.Name": "yummy-recipes-frontend-1b",
+                            "tenancy": "default",
+                            "volume_tags.%": "0",
+                            "vpc_security_group_ids.#": "1",
+                            "vpc_security_group_ids.40639550": "sg-060e73a35c142f159"
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 600000000000,
+                                "delete": 1200000000000,
+                                "update": 600000000000
+                            },
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_internet_gateway.yummy-recipes-igw": {
+                    "type": "aws_internet_gateway",
+                    "depends_on": [
+                        "aws_vpc.yummy-recipes"
+                    ],
+                    "primary": {
+                        "id": "igw-0f7960e066b8d5f51",
+                        "attributes": {
+                            "id": "igw-0f7960e066b8d5f51",
+                            "tags.%": "1",
+                            "tags.Name": "yummy-recipes-igw",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_lb.api-lb": {
+                    "type": "aws_lb",
+                    "depends_on": [
+                        "aws_security_group.frontend-sg",
+                        "aws_subnet.api-1a",
+                        "aws_subnet.api-1b"
+                    ],
+                    "primary": {
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:loadbalancer/app/api-lb/6b41c9bf3c32b03b",
+                        "attributes": {
+                            "access_logs.#": "0",
+                            "arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:loadbalancer/app/api-lb/6b41c9bf3c32b03b",
+                            "arn_suffix": "app/api-lb/6b41c9bf3c32b03b",
+                            "dns_name": "api-lb-2065192355.us-east-1.elb.amazonaws.com",
+                            "enable_deletion_protection": "false",
+                            "enable_http2": "true",
+                            "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:loadbalancer/app/api-lb/6b41c9bf3c32b03b",
+                            "idle_timeout": "60",
+                            "internal": "false",
+                            "ip_address_type": "ipv4",
+                            "load_balancer_type": "application",
+                            "name": "api-lb",
+                            "security_groups.#": "1",
+                            "security_groups.40639550": "sg-060e73a35c142f159",
+                            "subnet_mapping.#": "0",
+                            "subnets.#": "2",
+                            "subnets.1092868908": "subnet-0e32d7a84f5234c20",
+                            "subnets.2588802247": "subnet-070786433b8fdb094",
+                            "tags.%": "1",
+                            "tags.name": "api-lb",
+                            "vpc_id": "vpc-01c830aa197f4d8d3",
+                            "zone_id": "Z35SXDOTRQ7X7K"
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 600000000000,
+                                "delete": 600000000000,
+                                "update": 600000000000
+                            }
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_lb.frontend-lb": {
+                    "type": "aws_lb",
+                    "depends_on": [
+                        "aws_security_group.frontend-sg",
+                        "aws_subnet.frontend-1a",
+                        "aws_subnet.frontend-1b"
+                    ],
+                    "primary": {
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:loadbalancer/app/frontend-lb/a15ccdae7374be09",
+                        "attributes": {
+                            "access_logs.#": "0",
+                            "arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:loadbalancer/app/frontend-lb/a15ccdae7374be09",
+                            "arn_suffix": "app/frontend-lb/a15ccdae7374be09",
+                            "dns_name": "frontend-lb-923050718.us-east-1.elb.amazonaws.com",
+                            "enable_deletion_protection": "false",
+                            "enable_http2": "true",
+                            "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:loadbalancer/app/frontend-lb/a15ccdae7374be09",
+                            "idle_timeout": "60",
+                            "internal": "false",
+                            "ip_address_type": "ipv4",
+                            "load_balancer_type": "application",
+                            "name": "frontend-lb",
+                            "security_groups.#": "1",
+                            "security_groups.40639550": "sg-060e73a35c142f159",
+                            "subnet_mapping.#": "0",
+                            "subnets.#": "2",
+                            "subnets.3462217413": "subnet-07485a504b52a62b2",
+                            "subnets.54127286": "subnet-07efbe658c6e9db01",
+                            "tags.%": "1",
+                            "tags.name": "frontend-lb",
+                            "vpc_id": "vpc-01c830aa197f4d8d3",
+                            "zone_id": "Z35SXDOTRQ7X7K"
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 600000000000,
+                                "delete": 600000000000,
+                                "update": 600000000000
+                            }
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_lb_listener.api-lb-listener2": {
+                    "type": "aws_lb_listener",
+                    "depends_on": [
+                        "aws_lb.api-lb",
+                        "aws_lb_target_group.api-tg"
+                    ],
+                    "primary": {
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:listener/app/api-lb/6b41c9bf3c32b03b/0cde2a3af22cc1ac",
+                        "attributes": {
+                            "arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:listener/app/api-lb/6b41c9bf3c32b03b/0cde2a3af22cc1ac",
+                            "default_action.#": "1",
+                            "default_action.0.target_group_arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/api-lb/6d535c2557c378b9",
+                            "default_action.0.type": "forward",
+                            "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:listener/app/api-lb/6b41c9bf3c32b03b/0cde2a3af22cc1ac",
+                            "load_balancer_arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:loadbalancer/app/api-lb/6b41c9bf3c32b03b",
+                            "port": "80",
+                            "protocol": "HTTP",
+                            "ssl_policy": ""
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_lb_listener.frontend-lb-listener2": {
+                    "type": "aws_lb_listener",
+                    "depends_on": [
+                        "aws_lb.frontend-lb",
+                        "aws_lb_target_group.frontend-tg"
+                    ],
+                    "primary": {
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:listener/app/frontend-lb/a15ccdae7374be09/ce54ca7544673ddb",
+                        "attributes": {
+                            "arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:listener/app/frontend-lb/a15ccdae7374be09/ce54ca7544673ddb",
+                            "default_action.#": "1",
+                            "default_action.0.target_group_arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/frontend-lb/2632718056f7cd96",
+                            "default_action.0.type": "forward",
+                            "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:listener/app/frontend-lb/a15ccdae7374be09/ce54ca7544673ddb",
+                            "load_balancer_arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:loadbalancer/app/frontend-lb/a15ccdae7374be09",
+                            "port": "80",
+                            "protocol": "HTTP",
+                            "ssl_policy": ""
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_lb_target_group.api-tg": {
+                    "type": "aws_lb_target_group",
+                    "depends_on": [
+                        "aws_vpc.yummy-recipes"
+                    ],
+                    "primary": {
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/api-lb/6d535c2557c378b9",
+                        "attributes": {
+                            "arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/api-lb/6d535c2557c378b9",
+                            "arn_suffix": "targetgroup/api-lb/6d535c2557c378b9",
+                            "deregistration_delay": "300",
+                            "health_check.#": "1",
+                            "health_check.0.healthy_threshold": "3",
+                            "health_check.0.interval": "30",
+                            "health_check.0.matcher": "302",
+                            "health_check.0.path": "/",
+                            "health_check.0.port": "80",
+                            "health_check.0.protocol": "HTTP",
+                            "health_check.0.timeout": "5",
+                            "health_check.0.unhealthy_threshold": "3",
+                            "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/api-lb/6d535c2557c378b9",
+                            "name": "api-lb",
+                            "port": "80",
+                            "protocol": "HTTP",
+                            "proxy_protocol_v2": "false",
+                            "slow_start": "0",
+                            "stickiness.#": "1",
+                            "stickiness.0.cookie_duration": "86400",
+                            "stickiness.0.enabled": "false",
+                            "stickiness.0.type": "lb_cookie",
+                            "tags.%": "1",
+                            "tags.name": "api-lb",
+                            "target_type": "instance",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_lb_target_group.frontend-tg": {
+                    "type": "aws_lb_target_group",
+                    "depends_on": [
+                        "aws_vpc.yummy-recipes"
+                    ],
+                    "primary": {
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/frontend-lb/2632718056f7cd96",
+                        "attributes": {
+                            "arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/frontend-lb/2632718056f7cd96",
+                            "arn_suffix": "targetgroup/frontend-lb/2632718056f7cd96",
+                            "deregistration_delay": "300",
+                            "health_check.#": "1",
+                            "health_check.0.healthy_threshold": "3",
+                            "health_check.0.interval": "30",
+                            "health_check.0.matcher": "200",
+                            "health_check.0.path": "/",
+                            "health_check.0.port": "80",
+                            "health_check.0.protocol": "HTTP",
+                            "health_check.0.timeout": "5",
+                            "health_check.0.unhealthy_threshold": "3",
+                            "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/frontend-lb/2632718056f7cd96",
+                            "name": "frontend-lb",
+                            "port": "80",
+                            "protocol": "HTTP",
+                            "proxy_protocol_v2": "false",
+                            "slow_start": "0",
+                            "stickiness.#": "1",
+                            "stickiness.0.cookie_duration": "86400",
+                            "stickiness.0.enabled": "false",
+                            "stickiness.0.type": "lb_cookie",
+                            "tags.%": "1",
+                            "tags.name": "frontend-lb",
+                            "target_type": "instance",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_lb_target_group_attachment.api-tg-att1": {
+                    "type": "aws_lb_target_group_attachment",
+                    "depends_on": [
+                        "aws_instance.yummy-recipes-api-1a",
+                        "aws_lb_target_group.api-tg"
+                    ],
+                    "primary": {
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/api-lb/6d535c2557c378b9-20180604133547862000000004",
+                        "attributes": {
+                            "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/api-lb/6d535c2557c378b9-20180604133547862000000004",
+                            "port": "80",
+                            "target_group_arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/api-lb/6d535c2557c378b9",
+                            "target_id": "i-06f4d697ed2fa5923"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_lb_target_group_attachment.api-tg-att2": {
+                    "type": "aws_lb_target_group_attachment",
+                    "depends_on": [
+                        "aws_instance.yummy-recipes-api-1b",
+                        "aws_lb_target_group.api-tg"
+                    ],
+                    "primary": {
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/api-lb/6d535c2557c378b9-20180604133547096000000003",
+                        "attributes": {
+                            "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/api-lb/6d535c2557c378b9-20180604133547096000000003",
+                            "port": "80",
+                            "target_group_arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/api-lb/6d535c2557c378b9",
+                            "target_id": "i-07bacadaa1aeeb8f6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_lb_target_group_attachment.frontend-tg-att1": {
+                    "type": "aws_lb_target_group_attachment",
+                    "depends_on": [
+                        "aws_instance.yummy-recipes-frontend-1a",
+                        "aws_lb_target_group.frontend-tg"
+                    ],
+                    "primary": {
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/frontend-lb/2632718056f7cd96-20180604133547057400000002",
+                        "attributes": {
+                            "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/frontend-lb/2632718056f7cd96-20180604133547057400000002",
+                            "port": "80",
+                            "target_group_arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/frontend-lb/2632718056f7cd96",
+                            "target_id": "i-04560d7cf5c12503b"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_lb_target_group_attachment.frontend-tg-att2": {
+                    "type": "aws_lb_target_group_attachment",
+                    "depends_on": [
+                        "aws_instance.yummy-recipes-frontend-1b",
+                        "aws_lb_target_group.frontend-tg"
+                    ],
+                    "primary": {
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/frontend-lb/2632718056f7cd96-20180604133542853900000001",
+                        "attributes": {
+                            "id": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/frontend-lb/2632718056f7cd96-20180604133542853900000001",
+                            "port": "80",
+                            "target_group_arn": "arn:aws:elasticloadbalancing:us-east-1:462206789139:targetgroup/frontend-lb/2632718056f7cd96",
+                            "target_id": "i-0ed62d5f21c15d856"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_nat_gateway.yummy-recipes-nat": {
+                    "type": "aws_nat_gateway",
+                    "depends_on": [
+                        "aws_eip.nat-eip",
+                        "aws_subnet.frontend-1a"
+                    ],
+                    "primary": {
+                        "id": "nat-0084c96e174e7896d",
+                        "attributes": {
+                            "allocation_id": "eipalloc-03c36248fb18fffb2",
+                            "id": "nat-0084c96e174e7896d",
+                            "network_interface_id": "eni-4fa6bdd4",
+                            "private_ip": "10.0.1.10",
+                            "public_ip": "34.199.185.88",
+                            "subnet_id": "subnet-07efbe658c6e9db01",
+                            "tags.%": "0"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route53_record.api-record": {
+                    "type": "aws_route53_record",
+                    "depends_on": [
+                        "aws_lb.api-lb",
+                        "aws_route53_zone.primary"
+                    ],
+                    "primary": {
+                        "id": "Z3PENR38SNQ6VQ_api_CNAME",
+                        "attributes": {
+                            "allow_overwrite": "true",
+                            "fqdn": "api.yummyrecipes.ml",
+                            "id": "Z3PENR38SNQ6VQ_api_CNAME",
+                            "name": "api",
+                            "records.#": "1",
+                            "records.1547687095": "api-lb-2065192355.us-east-1.elb.amazonaws.com",
+                            "ttl": "300",
+                            "type": "CNAME",
+                            "zone_id": "Z3PENR38SNQ6VQ"
+                        },
+                        "meta": {
+                            "schema_version": "2"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route53_record.cert_validation": {
+                    "type": "aws_route53_record",
+                    "depends_on": [
+                        "aws_acm_certificate.cert",
+                        "aws_route53_zone.primary"
+                    ],
+                    "primary": {
+                        "id": "Z3PENR38SNQ6VQ__0a50cf10f917fe5190abaa791661f3fa.yummyrecipes.ml._CNAME",
+                        "attributes": {
+                            "allow_overwrite": "true",
+                            "fqdn": "_0a50cf10f917fe5190abaa791661f3fa.yummyrecipes.ml",
+                            "health_check_id": "",
+                            "id": "Z3PENR38SNQ6VQ__0a50cf10f917fe5190abaa791661f3fa.yummyrecipes.ml._CNAME",
+                            "name": "_0a50cf10f917fe5190abaa791661f3fa.yummyrecipes.ml",
+                            "records.#": "1",
+                            "records.1734003804": "_c7afd2496f36d297b5ad9d4a00a82098.acm-validations.aws.",
+                            "set_identifier": "",
+                            "ttl": "60",
+                            "type": "CNAME",
+                            "zone_id": "Z3PENR38SNQ6VQ"
+                        },
+                        "meta": {
+                            "schema_version": "2"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route53_record.frontend-record": {
+                    "type": "aws_route53_record",
+                    "depends_on": [
+                        "aws_lb.frontend-lb",
+                        "aws_route53_zone.primary"
+                    ],
+                    "primary": {
+                        "id": "Z3PENR38SNQ6VQ_www_CNAME",
+                        "attributes": {
+                            "allow_overwrite": "true",
+                            "fqdn": "www.yummyrecipes.ml",
+                            "id": "Z3PENR38SNQ6VQ_www_CNAME",
+                            "name": "www",
+                            "records.#": "1",
+                            "records.2931190108": "frontend-lb-923050718.us-east-1.elb.amazonaws.com",
+                            "ttl": "300",
+                            "type": "CNAME",
+                            "zone_id": "Z3PENR38SNQ6VQ"
+                        },
+                        "meta": {
+                            "schema_version": "2"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route53_zone.primary": {
+                    "type": "aws_route53_zone",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "Z3PENR38SNQ6VQ",
+                        "attributes": {
+                            "comment": "Managed by Terraform",
+                            "force_destroy": "false",
+                            "id": "Z3PENR38SNQ6VQ",
+                            "name": "yummyrecipes.ml",
+                            "name_servers.#": "4",
+                            "name_servers.0": "ns-1014.awsdns-62.net",
+                            "name_servers.1": "ns-1512.awsdns-61.org",
+                            "name_servers.2": "ns-1797.awsdns-32.co.uk",
+                            "name_servers.3": "ns-332.awsdns-41.com",
+                            "tags.%": "0",
+                            "zone_id": "Z3PENR38SNQ6VQ"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route_table.public-rt": {
+                    "type": "aws_route_table",
+                    "depends_on": [
+                        "aws_internet_gateway.yummy-recipes-igw",
+                        "aws_vpc.yummy-recipes"
+                    ],
+                    "primary": {
+                        "id": "rtb-035018fe21a8b22b8",
+                        "attributes": {
+                            "id": "rtb-035018fe21a8b22b8",
+                            "propagating_vgws.#": "0",
+                            "route.#": "1",
+                            "route.2950929755.cidr_block": "0.0.0.0/0",
+                            "route.2950929755.egress_only_gateway_id": "",
+                            "route.2950929755.gateway_id": "igw-0f7960e066b8d5f51",
+                            "route.2950929755.instance_id": "",
+                            "route.2950929755.ipv6_cidr_block": "",
+                            "route.2950929755.nat_gateway_id": "",
+                            "route.2950929755.network_interface_id": "",
+                            "route.2950929755.vpc_peering_connection_id": "",
+                            "tags.%": "1",
+                            "tags.Name": "public-rt",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route_table_association.public-rt1": {
+                    "type": "aws_route_table_association",
+                    "depends_on": [
+                        "aws_route_table.public-rt",
+                        "aws_subnet.frontend-1a"
+                    ],
+                    "primary": {
+                        "id": "rtbassoc-07f87711c86e6e06e",
+                        "attributes": {
+                            "id": "rtbassoc-07f87711c86e6e06e",
+                            "route_table_id": "rtb-035018fe21a8b22b8",
+                            "subnet_id": "subnet-07efbe658c6e9db01"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_route_table_association.public-rt2": {
+                    "type": "aws_route_table_association",
+                    "depends_on": [
+                        "aws_route_table.public-rt",
+                        "aws_subnet.frontend-1b"
+                    ],
+                    "primary": {
+                        "id": "rtbassoc-04d8083125c6f85e0",
+                        "attributes": {
+                            "id": "rtbassoc-04d8083125c6f85e0",
+                            "route_table_id": "rtb-035018fe21a8b22b8",
+                            "subnet_id": "subnet-07485a504b52a62b2"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_security_group.api-sg": {
+                    "type": "aws_security_group",
+                    "depends_on": [
+                        "aws_vpc.yummy-recipes"
+                    ],
+                    "primary": {
+                        "id": "sg-0569f2f327fb32940",
+                        "attributes": {
+                            "arn": "arn:aws:ec2:us-east-1:462206789139:security-group/sg-0569f2f327fb32940",
+                            "description": "Allow internal connections",
+                            "egress.#": "0",
+                            "id": "sg-0569f2f327fb32940",
+                            "ingress.#": "3",
+                            "ingress.1829582617.cidr_blocks.#": "1",
+                            "ingress.1829582617.cidr_blocks.0": "10.0.0.0/16",
+                            "ingress.1829582617.description": "",
+                            "ingress.1829582617.from_port": "443",
+                            "ingress.1829582617.ipv6_cidr_blocks.#": "0",
+                            "ingress.1829582617.protocol": "tcp",
+                            "ingress.1829582617.security_groups.#": "0",
+                            "ingress.1829582617.self": "false",
+                            "ingress.1829582617.to_port": "443",
+                            "ingress.2165049311.cidr_blocks.#": "1",
+                            "ingress.2165049311.cidr_blocks.0": "10.0.0.0/16",
+                            "ingress.2165049311.description": "",
+                            "ingress.2165049311.from_port": "80",
+                            "ingress.2165049311.ipv6_cidr_blocks.#": "0",
+                            "ingress.2165049311.protocol": "tcp",
+                            "ingress.2165049311.security_groups.#": "0",
+                            "ingress.2165049311.self": "false",
+                            "ingress.2165049311.to_port": "80",
+                            "ingress.931551850.cidr_blocks.#": "1",
+                            "ingress.931551850.cidr_blocks.0": "10.0.0.0/16",
+                            "ingress.931551850.description": "",
+                            "ingress.931551850.from_port": "22",
+                            "ingress.931551850.ipv6_cidr_blocks.#": "0",
+                            "ingress.931551850.protocol": "tcp",
+                            "ingress.931551850.security_groups.#": "0",
+                            "ingress.931551850.self": "false",
+                            "ingress.931551850.to_port": "22",
+                            "name": "api-sg",
+                            "owner_id": "462206789139",
+                            "revoke_rules_on_delete": "false",
+                            "tags.%": "1",
+                            "tags.Name": "api-sg",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 600000000000,
+                                "delete": 600000000000
+                            },
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_security_group.db-sg": {
+                    "type": "aws_security_group",
+                    "depends_on": [
+                        "aws_vpc.yummy-recipes"
+                    ],
+                    "primary": {
+                        "id": "sg-062e0cd81c9d8526e",
+                        "attributes": {
+                            "arn": "arn:aws:ec2:us-east-1:462206789139:security-group/sg-062e0cd81c9d8526e",
+                            "description": "Allow api to connect with db",
+                            "egress.#": "0",
+                            "id": "sg-062e0cd81c9d8526e",
+                            "ingress.#": "2",
+                            "ingress.2986364024.cidr_blocks.#": "2",
+                            "ingress.2986364024.cidr_blocks.0": "10.0.52.0/24",
+                            "ingress.2986364024.cidr_blocks.1": "10.0.51.0/24",
+                            "ingress.2986364024.description": "",
+                            "ingress.2986364024.from_port": "5432",
+                            "ingress.2986364024.ipv6_cidr_blocks.#": "0",
+                            "ingress.2986364024.protocol": "tcp",
+                            "ingress.2986364024.security_groups.#": "0",
+                            "ingress.2986364024.self": "false",
+                            "ingress.2986364024.to_port": "5432",
+                            "ingress.912400502.cidr_blocks.#": "1",
+                            "ingress.912400502.cidr_blocks.0": "41.212.110.20/32",
+                            "ingress.912400502.description": "",
+                            "ingress.912400502.from_port": "22",
+                            "ingress.912400502.ipv6_cidr_blocks.#": "0",
+                            "ingress.912400502.protocol": "tcp",
+                            "ingress.912400502.security_groups.#": "0",
+                            "ingress.912400502.self": "false",
+                            "ingress.912400502.to_port": "22",
+                            "name": "db-sg",
+                            "owner_id": "462206789139",
+                            "revoke_rules_on_delete": "false",
+                            "tags.%": "1",
+                            "tags.Name": "db-sg",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 600000000000,
+                                "delete": 600000000000
+                            },
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_security_group.frontend-sg": {
+                    "type": "aws_security_group",
+                    "depends_on": [
+                        "aws_vpc.yummy-recipes"
+                    ],
+                    "primary": {
+                        "id": "sg-060e73a35c142f159",
+                        "attributes": {
+                            "arn": "arn:aws:ec2:us-east-1:462206789139:security-group/sg-060e73a35c142f159",
+                            "description": "Allow world to access frontend",
+                            "egress.#": "0",
+                            "id": "sg-060e73a35c142f159",
+                            "ingress.#": "3",
+                            "ingress.2214680975.cidr_blocks.#": "1",
+                            "ingress.2214680975.cidr_blocks.0": "0.0.0.0/0",
+                            "ingress.2214680975.description": "",
+                            "ingress.2214680975.from_port": "80",
+                            "ingress.2214680975.ipv6_cidr_blocks.#": "0",
+                            "ingress.2214680975.protocol": "tcp",
+                            "ingress.2214680975.security_groups.#": "0",
+                            "ingress.2214680975.self": "false",
+                            "ingress.2214680975.to_port": "80",
+                            "ingress.2617001939.cidr_blocks.#": "1",
+                            "ingress.2617001939.cidr_blocks.0": "0.0.0.0/0",
+                            "ingress.2617001939.description": "",
+                            "ingress.2617001939.from_port": "443",
+                            "ingress.2617001939.ipv6_cidr_blocks.#": "0",
+                            "ingress.2617001939.protocol": "tcp",
+                            "ingress.2617001939.security_groups.#": "0",
+                            "ingress.2617001939.self": "false",
+                            "ingress.2617001939.to_port": "443",
+                            "ingress.912400502.cidr_blocks.#": "1",
+                            "ingress.912400502.cidr_blocks.0": "41.212.110.20/32",
+                            "ingress.912400502.description": "",
+                            "ingress.912400502.from_port": "22",
+                            "ingress.912400502.ipv6_cidr_blocks.#": "0",
+                            "ingress.912400502.protocol": "tcp",
+                            "ingress.912400502.security_groups.#": "0",
+                            "ingress.912400502.self": "false",
+                            "ingress.912400502.to_port": "22",
+                            "name": "frontend-sg",
+                            "owner_id": "462206789139",
+                            "revoke_rules_on_delete": "false",
+                            "tags.%": "1",
+                            "tags.Name": "frontend-sg",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 600000000000,
+                                "delete": 600000000000
+                            },
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_security_group.nat-sg": {
+                    "type": "aws_security_group",
+                    "depends_on": [
+                        "aws_vpc.yummy-recipes"
+                    ],
+                    "primary": {
+                        "id": "sg-099a772adea36fda7",
+                        "attributes": {
+                            "arn": "arn:aws:ec2:us-east-1:462206789139:security-group/sg-099a772adea36fda7",
+                            "description": "Allow api",
+                            "egress.#": "0",
+                            "id": "sg-099a772adea36fda7",
+                            "ingress.#": "3",
+                            "ingress.2501428879.cidr_blocks.#": "2",
+                            "ingress.2501428879.cidr_blocks.0": "10.0.52.0/24",
+                            "ingress.2501428879.cidr_blocks.1": "10.0.51.0/24",
+                            "ingress.2501428879.description": "",
+                            "ingress.2501428879.from_port": "443",
+                            "ingress.2501428879.ipv6_cidr_blocks.#": "0",
+                            "ingress.2501428879.protocol": "tcp",
+                            "ingress.2501428879.security_groups.#": "0",
+                            "ingress.2501428879.self": "false",
+                            "ingress.2501428879.to_port": "443",
+                            "ingress.518194442.cidr_blocks.#": "2",
+                            "ingress.518194442.cidr_blocks.0": "10.0.52.0/24",
+                            "ingress.518194442.cidr_blocks.1": "10.0.51.0/24",
+                            "ingress.518194442.description": "",
+                            "ingress.518194442.from_port": "80",
+                            "ingress.518194442.ipv6_cidr_blocks.#": "0",
+                            "ingress.518194442.protocol": "tcp",
+                            "ingress.518194442.security_groups.#": "0",
+                            "ingress.518194442.self": "false",
+                            "ingress.518194442.to_port": "80",
+                            "ingress.912400502.cidr_blocks.#": "1",
+                            "ingress.912400502.cidr_blocks.0": "41.212.110.20/32",
+                            "ingress.912400502.description": "",
+                            "ingress.912400502.from_port": "22",
+                            "ingress.912400502.ipv6_cidr_blocks.#": "0",
+                            "ingress.912400502.protocol": "tcp",
+                            "ingress.912400502.security_groups.#": "0",
+                            "ingress.912400502.self": "false",
+                            "ingress.912400502.to_port": "22",
+                            "name": "nat-sg",
+                            "owner_id": "462206789139",
+                            "revoke_rules_on_delete": "false",
+                            "tags.%": "1",
+                            "tags.Name": "nat-sg",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 600000000000,
+                                "delete": 600000000000
+                            },
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_subnet.api-1a": {
+                    "type": "aws_subnet",
+                    "depends_on": [
+                        "aws_vpc.yummy-recipes",
+                        "data.aws_availability_zones.available"
+                    ],
+                    "primary": {
+                        "id": "subnet-070786433b8fdb094",
+                        "attributes": {
+                            "assign_ipv6_address_on_creation": "false",
+                            "availability_zone": "us-east-1a",
+                            "cidr_block": "10.0.51.0/24",
+                            "id": "subnet-070786433b8fdb094",
+                            "map_public_ip_on_launch": "false",
+                            "tags.%": "1",
+                            "tags.Name": "api-1a",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_subnet.api-1b": {
+                    "type": "aws_subnet",
+                    "depends_on": [
+                        "aws_vpc.yummy-recipes",
+                        "data.aws_availability_zones.available"
+                    ],
+                    "primary": {
+                        "id": "subnet-0e32d7a84f5234c20",
+                        "attributes": {
+                            "assign_ipv6_address_on_creation": "false",
+                            "availability_zone": "us-east-1b",
+                            "cidr_block": "10.0.52.0/24",
+                            "id": "subnet-0e32d7a84f5234c20",
+                            "map_public_ip_on_launch": "false",
+                            "tags.%": "1",
+                            "tags.Name": "api-1b",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_subnet.frontend-1a": {
+                    "type": "aws_subnet",
+                    "depends_on": [
+                        "aws_vpc.yummy-recipes",
+                        "data.aws_availability_zones.available"
+                    ],
+                    "primary": {
+                        "id": "subnet-07efbe658c6e9db01",
+                        "attributes": {
+                            "assign_ipv6_address_on_creation": "false",
+                            "availability_zone": "us-east-1a",
+                            "cidr_block": "10.0.1.0/24",
+                            "id": "subnet-07efbe658c6e9db01",
+                            "map_public_ip_on_launch": "false",
+                            "tags.%": "1",
+                            "tags.Name": "frontend-1a",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_subnet.frontend-1b": {
+                    "type": "aws_subnet",
+                    "depends_on": [
+                        "aws_vpc.yummy-recipes",
+                        "data.aws_availability_zones.available"
+                    ],
+                    "primary": {
+                        "id": "subnet-07485a504b52a62b2",
+                        "attributes": {
+                            "assign_ipv6_address_on_creation": "false",
+                            "availability_zone": "us-east-1b",
+                            "cidr_block": "10.0.2.0/24",
+                            "id": "subnet-07485a504b52a62b2",
+                            "map_public_ip_on_launch": "false",
+                            "tags.%": "1",
+                            "tags.Name": "frontend-1b",
+                            "vpc_id": "vpc-01c830aa197f4d8d3"
+                        },
+                        "meta": {
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "aws_vpc.yummy-recipes": {
+                    "type": "aws_vpc",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "vpc-01c830aa197f4d8d3",
+                        "attributes": {
+                            "assign_generated_ipv6_cidr_block": "false",
+                            "cidr_block": "10.0.0.0/16",
+                            "default_network_acl_id": "acl-0b6521d54528a00ae",
+                            "default_route_table_id": "rtb-080a14039e67b5c85",
+                            "default_security_group_id": "sg-024c1e569e7c6cd30",
+                            "dhcp_options_id": "dopt-42986939",
+                            "enable_classiclink": "false",
+                            "enable_classiclink_dns_support": "false",
+                            "enable_dns_hostnames": "false",
+                            "enable_dns_support": "true",
+                            "id": "vpc-01c830aa197f4d8d3",
+                            "instance_tenancy": "default",
+                            "main_route_table_id": "rtb-080a14039e67b5c85",
+                            "tags.%": "1",
+                            "tags.Name": "yummy-recipes"
+                        },
+                        "meta": {
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "data.aws_ami.api_ami": {
+                    "type": "aws_ami",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "ami-039c9e39678f71170",
+                        "attributes": {
+                            "architecture": "x86_64",
+                            "block_device_mappings.#": "3",
+                            "block_device_mappings.1634610537.device_name": "/dev/sdb",
+                            "block_device_mappings.1634610537.ebs.%": "0",
+                            "block_device_mappings.1634610537.no_device": "",
+                            "block_device_mappings.1634610537.virtual_name": "ephemeral0",
+                            "block_device_mappings.2547816212.device_name": "/dev/sda1",
+                            "block_device_mappings.2547816212.ebs.%": "6",
+                            "block_device_mappings.2547816212.ebs.delete_on_termination": "true",
+                            "block_device_mappings.2547816212.ebs.encrypted": "false",
+                            "block_device_mappings.2547816212.ebs.iops": "0",
+                            "block_device_mappings.2547816212.ebs.snapshot_id": "snap-0cad5e28684c2d0c7",
+                            "block_device_mappings.2547816212.ebs.volume_size": "8",
+                            "block_device_mappings.2547816212.ebs.volume_type": "gp2",
+                            "block_device_mappings.2547816212.no_device": "",
+                            "block_device_mappings.2547816212.virtual_name": "",
+                            "block_device_mappings.3850042718.device_name": "/dev/sdc",
+                            "block_device_mappings.3850042718.ebs.%": "0",
+                            "block_device_mappings.3850042718.no_device": "",
+                            "block_device_mappings.3850042718.virtual_name": "ephemeral1",
+                            "creation_date": "2018-06-03T15:10:19.000Z",
+                            "filter.#": "1",
+                            "filter.1917192003.name": "name",
+                            "filter.1917192003.values.#": "1",
+                            "filter.1917192003.values.0": "yummy-recipes-api*",
+                            "hypervisor": "xen",
+                            "id": "ami-039c9e39678f71170",
+                            "image_id": "ami-039c9e39678f71170",
+                            "image_location": "462206789139/yummy-recipes-api 1528038250",
+                            "image_type": "machine",
+                            "most_recent": "true",
+                            "name": "yummy-recipes-api 1528038250",
+                            "owner_id": "462206789139",
+                            "product_codes.#": "0",
+                            "public": "false",
+                            "root_device_name": "/dev/sda1",
+                            "root_device_type": "ebs",
+                            "root_snapshot_id": "snap-0cad5e28684c2d0c7",
+                            "sriov_net_support": "simple",
+                            "state": "available",
+                            "state_reason.%": "2",
+                            "state_reason.code": "UNSET",
+                            "state_reason.message": "UNSET",
+                            "tags.%": "1",
+                            "tags.name": "yummy-recipes-api 1528038250",
+                            "virtualization_type": "hvm"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "data.aws_ami.frontend_ami": {
+                    "type": "aws_ami",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "ami-041494073ab057bb0",
+                        "attributes": {
+                            "architecture": "x86_64",
+                            "block_device_mappings.#": "3",
+                            "block_device_mappings.1634610537.device_name": "/dev/sdb",
+                            "block_device_mappings.1634610537.ebs.%": "0",
+                            "block_device_mappings.1634610537.no_device": "",
+                            "block_device_mappings.1634610537.virtual_name": "ephemeral0",
+                            "block_device_mappings.2547816212.device_name": "/dev/sda1",
+                            "block_device_mappings.2547816212.ebs.%": "6",
+                            "block_device_mappings.2547816212.ebs.delete_on_termination": "true",
+                            "block_device_mappings.2547816212.ebs.encrypted": "false",
+                            "block_device_mappings.2547816212.ebs.iops": "0",
+                            "block_device_mappings.2547816212.ebs.snapshot_id": "snap-09eef6754ddbee9a9",
+                            "block_device_mappings.2547816212.ebs.volume_size": "8",
+                            "block_device_mappings.2547816212.ebs.volume_type": "gp2",
+                            "block_device_mappings.2547816212.no_device": "",
+                            "block_device_mappings.2547816212.virtual_name": "",
+                            "block_device_mappings.3850042718.device_name": "/dev/sdc",
+                            "block_device_mappings.3850042718.ebs.%": "0",
+                            "block_device_mappings.3850042718.no_device": "",
+                            "block_device_mappings.3850042718.virtual_name": "ephemeral1",
+                            "creation_date": "2018-06-04T07:25:57.000Z",
+                            "filter.#": "1",
+                            "filter.912509953.name": "tag:name",
+                            "filter.912509953.values.#": "1",
+                            "filter.912509953.values.0": "yummy-recipes-frontend*",
+                            "hypervisor": "xen",
+                            "id": "ami-041494073ab057bb0",
+                            "image_id": "ami-041494073ab057bb0",
+                            "image_location": "462206789139/yummy-recipes-frontend 1528096915",
+                            "image_type": "machine",
+                            "most_recent": "true",
+                            "name": "yummy-recipes-frontend 1528096915",
+                            "owner_id": "462206789139",
+                            "product_codes.#": "0",
+                            "public": "false",
+                            "root_device_name": "/dev/sda1",
+                            "root_device_type": "ebs",
+                            "root_snapshot_id": "snap-09eef6754ddbee9a9",
+                            "sriov_net_support": "simple",
+                            "state": "available",
+                            "state_reason.%": "2",
+                            "state_reason.code": "UNSET",
+                            "state_reason.message": "UNSET",
+                            "tags.%": "2",
+                            "tags.Name": "",
+                            "tags.name": "yummy-recipes-frontend 1528096915",
+                            "virtualization_type": "hvm"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                },
+                "data.aws_availability_zones.available": {
+                    "type": "aws_availability_zones",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "2018-06-04 19:26:58.326496 +0000 UTC",
+                        "attributes": {
+                            "id": "2018-06-04 19:26:58.326496 +0000 UTC",
+                            "names.#": "6",
+                            "names.0": "us-east-1a",
+                            "names.1": "us-east-1b",
+                            "names.2": "us-east-1c",
+                            "names.3": "us-east-1d",
+                            "names.4": "us-east-1e",
+                            "names.5": "us-east-1f"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.aws"
+                }
+            },
+            "depends_on": []
+        }
+    ]
+}

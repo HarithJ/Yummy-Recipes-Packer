@@ -1,9 +1,0 @@
-[Unit]
-Description=Configure Nginx server
-
-[Service]
-Type=oneshot
-ExecStart=/home/ubuntu/nginx-cloud-init.sh
-
-[Install]
-WantedBy=multi-user.target
