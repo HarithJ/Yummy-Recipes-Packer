@@ -104,6 +104,13 @@ resource "aws_security_group" "frontend-sg" {
     cidr_blocks = ["41.212.110.20/32"]
   }
 
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+
   tags {
     Name = "frontend-sg"
   }
@@ -133,6 +140,13 @@ resource "aws_security_group" "api-sg" {
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["10.0.0.0/16"]
+  }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
   }
 
   tags {
@@ -166,6 +180,13 @@ resource "aws_security_group" "nat-sg" {
     cidr_blocks = ["10.0.52.0/24", "10.0.51.0/24"]
   }
 
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+
   tags {
     Name = "nat-sg"
   }
@@ -188,6 +209,13 @@ resource "aws_security_group" "db-sg" {
     to_port     = 5432
     protocol    = "tcp"
     cidr_blocks = ["10.0.52.0/24", "10.0.51.0/24"]
+  }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
   }
 
   tags {
